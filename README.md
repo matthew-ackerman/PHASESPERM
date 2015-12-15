@@ -10,9 +10,9 @@ This python script requires scipy and numpy. If you do not have these installed 
 phasesperm.py expects data to be in a tab delimited file with 3 columns containing the scaffold, position and consensus information, and then one column for each sperm sequenced.
 The symbol '-' is used for missing data. For example, if 4 sperm were sequenced, then a few lines of this file might look like:
 
-	scaffold\_49     1043    T       -       -       A	T
-	scaffold\_49     2240    T       T       -       T	A
-	scaffold\_49     2363    G       G       -       -	C
+	scaffold_49     1043    T       -       -       A	T
+	scaffold_49     2240    T       T       -       T	A
+	scaffold_49     2363    G       G       -       -	C
 
 If you want to generate test data in this format, type:
 
