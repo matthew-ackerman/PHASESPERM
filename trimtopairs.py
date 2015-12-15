@@ -23,4 +23,4 @@ for line in File:
 				pairs[SPERM][EVENT]=[MIN, MAX, MIN, MAX]
 for s in pairs.keys():
 	for e in pairs[s].keys():
-		print pairs[s][e][2]-pairs[s][e][1]+1, '\b,' ,pairs[s][e][3]-pairs[s][e][0]+1
+		print str(pairs[s][e][2]-pairs[s][e][1]+1)+", "+str(pairs[s][e][3]-pairs[s][e][0]+1)

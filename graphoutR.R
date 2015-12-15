@@ -20,7 +20,7 @@ y<-max(pos)			#?
 
 #iterate over the scaffolds
 for (s in unique(scaffold) ){
-	for (j in 0:(L/N) ){
+	for (j in 0:( (L-1)/N) ){
 		print(s)
 		print(j)
 		plot(pos[scaffold==s & type=="EMPTY"],calls[,1][scaffold==s & type=="EMPTY"], pch='|', bty='n', xlim=c(x, y), ylim=c(-N*SI-0.25*OFF, 4.75+0.25*OFF ), xlab="position (kb)", ylab="sperm", yaxt='n', main=s)
@@ -28,20 +28,20 @@ for (s in unique(scaffold) ){
 #	rect(pos[scaffold==s & type=="ERR"], pos[scaffold==s & type=="ERR"], ,col="red")
 #}
 
-		for (z in (j*N+1):min((j+1)*N, L-1) ){
+		for (z in (j*N+1):min((j+1)*N, L) ){
 			rect(0,0.5-(z-j*N)*SI, max(pos[scaffold==s]), -1.5-(z-j*N)*SI, col="gray")
 		}
-		for (z in (j*N+1):min((j+1)*N, L-1) ){
+		for (z in (j*N+1):min((j+1)*N, L) ){
 			print(z)
 			points(pos[scaffold==s & type=="BAD"], -calls[,z][scaffold==s & type=="BAD"]-(z-j*N)*SI, col=ifelse( (calls[,z][scaffold==s & type=="BAD"])==0, "gray58", "gray58") , cex=A, pch='|')
 			points(pos[scaffold==s & type=="HAP"], -calls[,z][scaffold==s & type=="HAP"]-(z-j*N)*SI, col=ifelse( (calls[,z][scaffold==s & type=="HAP"])==0, "black", "red") , cex=A, pch='|')
-		#	points(pos[scaffold==s & type=="GC"], -calls[,z][scaffold==s & type=="GC"]-z*SI+2, col="green", cex=A, pch=6)
-		#	points(pos[scaffold==s & type=="GEC"], -calls[,z][scaffold==s & type=="GEC"]-z*SI+2, col="yellow", cex=A, pch=6)
+			points(pos[scaffold==s & type=="CO"], -calls[,z][scaffold==s & type=="CO"]-(z-j*N)*SI+2, col="green", cex=A, pch=6)
+			points(pos[scaffold==s & type=="GC"], -calls[,z][scaffold==s & type=="GC"]-(z-j*N)*SI+2, col="orange", cex=A, pch=6)
 		#	points(pos[scaffold==s & type=="ERR"], -calls[,z][scaffold==s & type=="ERR"]-z*SI+2, col="red", cex=A, pch=6)
 		}
 
-		for (z in (j*N+1):min((j+1)*N, L-1) ){
-			text( x/1000-(x-y)*0.02, -0.45-SI*(z-j*N), z, cex=0.75)
+		for (z in (j*N+1):min((j+1)*N, L) ){
+			text( x-(y-x)*0.025, -0.45-SI*(z-j*N), z, cex=0.75)
 		}
 	}
 	break

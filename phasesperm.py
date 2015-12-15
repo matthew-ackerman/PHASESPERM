@@ -9,7 +9,7 @@ import operator
 
 max_rec=15	
 group_thresh=20
-snp_thresh=1
+snp_thresh=5
 minphased=90
 N50=101
 CGSIZE=10000
@@ -341,9 +341,9 @@ def write_end(scaffold, group, numlines):
 		else:
 			    TYPE="CO"
 		if event.bad:
-			name=TYPE+"("+str(len(group) )+")"+str(event.line)+":#"+str(event.event)+"_BAD"+str(event.bad)+"-"+str(event.count)
+			name=TYPE+"("+str(len(group) )+")"+str(event.line)+":#"+str(event.event)+"_BAD-"+str(event.count)
 		else:
-			name=TYPE+"("+str(len(group) )+")"+str(event.line)+":#"+str(event.event)+"_GOOD"++"-"+str(event.count)
+			name=TYPE+"("+str(len(group) )+")"+str(event.line)+":#"+str(event.event)+"_GOOD-"+str(event.count)
 		bit=[]
 		for x in range(0, numlines):
 			if x==event.line:
@@ -351,7 +351,10 @@ def write_end(scaffold, group, numlines):
 			else:
 				bit.append('')
 		ret.append(','.join(map(str, [scaffold, bp, TYPE]+[bR1]+[bR2]+[str(event.fivepSNPs)+"/"+str(event.threepSNPs)]+[name, 'Rec']+bit) ) )
-	return '\n'.join(ret)+'\n'
+	if ret!=[]:
+		return '\n'.join(ret)+'\n'
+	else: 
+		return ''
 
 
 def join(SNP1, SNP2):
@@ -412,7 +415,6 @@ while len(SpermFile)>0:
 		except:
 			print "Error!"
 			print line
-
 
 	if len(SpermFile)==0 or scaffold!=this:
 		if this!="":
@@ -484,6 +486,7 @@ while len(SpermFile)>0:
 								new_blocks.append(T)
 					blocks=new_blocks
 
+				print len(masked)
 				masked.sort(key=lambda tup: tup.list[0].bp)
 
 				#set all blocks in blocks to the state closest to (B)iggest.					
@@ -493,7 +496,7 @@ while len(SpermFile)>0:
 					if (cR2<cR1):
 						blocks[x]=blocks[x].flip()
 				
-				#set all blocks to masked the state closest to (B)iggest.
+				#set all blocks in masked to the state closest to (B)iggest.
 				for x in range(0, len(masked) ):
 					T=masked[x]
 					[cR1, cR2, R1, R2]=getR(B,T)
@@ -581,6 +584,7 @@ while len(SpermFile)>0:
 					for event in hapblock[x]:
 						if event.start==0:
 							event.bad=True
+							continue
 						if error(event, 0.0000001, numlines, 0.01):
 							event.bad=True
 							good[event.line].append(event)
