@@ -10,7 +10,7 @@ Linkagegroups=14
 
 GC=20
 
-Number_of_markers=50000
+Number_of_markers=5000
 Prob_of_marker=0.50
 Markers_per_scaffold=Number_of_markers/Number_of_scaffolds
 Markers_per_scaffold=Number_of_markers/Number_of_scaffolds

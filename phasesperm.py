@@ -340,7 +340,10 @@ def write_end(scaffold, group, numlines):
 			    TYPE="GC"
 		else:
 			    TYPE="CO"
-		name=TYPE+"("+str(len(group) )+")"+str(event.line)+":#"+str(event.event)+"_"+str(event.bad)+"-"+str(event.count)
+		if event.bad:
+			name=TYPE+"("+str(len(group) )+")"+str(event.line)+":#"+str(event.event)+"_BAD"+str(event.bad)+"-"+str(event.count)
+		else:
+			name=TYPE+"("+str(len(group) )+")"+str(event.line)+":#"+str(event.event)+"_GOOD"++"-"+str(event.count)
 		bit=[]
 		for x in range(0, numlines):
 			if x==event.line:

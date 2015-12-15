@@ -1,6 +1,9 @@
 #PHASESPERM
 A program to phase sperm. 
 
+##Before you start
+sudo apt-get install python-scipy
+
 Data should be formated :
 
 A simple test script generates data :
