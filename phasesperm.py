@@ -673,7 +673,7 @@ for x in range(0, len(loci) ):
 				LG[L1.name()]=LG[L2.name()]
 				if(cR2<cR1):
 					L2.flip()
-print "found "+str(len(LGlist))+" tenetive linkage groups."
+print "found "+str(len(LGlist))+" tentative linkage groups."
 File=open("MST-data.txt", 'w')
 File.write("population_type DH\npopulation_name LG\ndistance_function kosambi\ncut_off_p_value 0.000001\nno_map_dist 15.0\nno_map_size 0\nmissing_threshold 1.00\nestimation_before_clustering no\ndetect_bad_data yes\nobjective_function COUNT\nnumber_of_loci "+str(len(loci))+"\nnumber_of_individual "+str(numlines)+"\n")
 File.write("\nlocus_name\t"+'\t'.join(header)+'\n')
